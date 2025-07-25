@@ -3,8 +3,6 @@ import random
 import json
 import pickle   #trabajamos con archivos que podemos guardar 
 import numpy as np
-
-
 import nltk
 from nltk.stem import WordNetLemmatizer
 
@@ -36,7 +34,7 @@ for intent in intents['intents']:
         #tokenizar cada palabra a 1 y 0
         word_list = nltk.word_tokenize(pattern)
         words.extend(word_list)
-        #en esta lista, relacionar las pelabras que añadimos con el indentificador
+        #en esta lista, relacionar las palabras que añadimos con el indentificador
         documents.append ((word_list, intent["tag"]))
         if intent["tag"] not in classes:
             classes.append(intent["tag"])
@@ -66,9 +64,12 @@ for document in documents:
     output_row[classes.index(document[1])] = 1
     #añadir a la lista de entrenamiento
     training.append([bag, output_row])
-random.shuffle(training)  #mezclar los datos
-training = np.array(training, dtype=object)  #convertir a array
-print (training)
+
+    random.shuffle(training)  #mezclar los datos
+#arreglar error
+
+    training = np.array(training, dtype=object)  #convertir a array
+    print (training)
 
 
 #entrenamiento
